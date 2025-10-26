@@ -52,7 +52,7 @@ import seaborn as sns
 #Part 4.1 and 4.2
 sns.relplot(data, x='Life expectancy, female', y='GNI per capita', hue= 'Region')
 sns.relplot(data, x='Life expectancy, male', y='GNI per capita', hue= 'Region')
-#yes, we inverted the y and x axis to better show the curve, but essentially, as the GNI per capita increases, the life expectancy also increases. 
+#Yes, we inverted the y and x axis to better show the curve, but essentially, as the GNI per capita increases, the life expectancy also increases. 
 
 #Part 4.3
 sns.relplot(data, x='Life expectancy, female', y='GNI per capita', hue='Region', kind='line', errorbar = 'sd')
@@ -69,7 +69,50 @@ sns.lmplot(data, x= 'Life expectancy, male', y='GNI per capita', hue= 'Region')
 #First question : Does tertiary education affect male and female life expectancies, and does it differ in each region?
 sns.relplot(data, x='Life expectancy, female', y='Tertiary education, female', col= 'Region')
 sns.relplot(data, x='Life expectancy, male', y='Tertiary education, male', col= 'Region')
-    #Female life expectanciy, in relation to it's tertiary education, has similar results to the male expectancy in each region. 
+    #Yes, female life expectanciy, in relation to it's tertiary education, has similar results to the male expectancy in each region. 
     #The main differences occur between different regions, for example, in Asia and Africa, life expectancy depends alot more on 
     #their education (there's a clear correlation ), than in Europe or America (where the plots are more scattered)
+
+#Second question : Is the GNI related to the high income economy of a country, and are they similar between each region?
+sns.relplot(data, x='High Income Economy', y='GNI per capita' , col= 'Region')
+    #Yes, the GNI per capita is related to high income economy. Only countries with higher GNI values are considered to have high income economy
+    #The relation doesnt differ in each region, but we can tell that countires in Europe and America have higher GNI and therefore more are
+    #considered to have high income economy. Also, there's no countries in Africa with high enough GNI to have high income economy. 
+    
+#Third question : Does the international tourism affect the income economy. 
+sns.relplot(data, x='High Income Economy', y='International tourism' , col= 'Region')
+    #No, there is no correlation between the international tourism and the country's income economy. 
+
+#Fourth question : Does the greenhhouse gas emissions have an effect on female life expectancy?
+sns.relplot(data, x='Life expectancy, female', y='Greenhouse gas emissions' , col= 'Region')
+    #No, there is no correlation between the two, we can only tell which region have higher gas emissions
+
+#Fifth question :  
+sns.relplot(data, x='Population', y='Greenhouse gas emissions' , col= 'Region')
+
+#6th question : 
+sns.relplot(data, x='Tertiary education, male', y='GNI per capita' , col= 'Region')
+
+
+#Part 4.6 
+
+#a)
+sns.relplot(data, x='Internet use', y='Greenhouse gas emissions', hue= 'Region')
+    # No, there is no clear assosiation in the data, or correlation in the plot
+
+#b)
+high_emissions = data[data['Greenhouse gas emissions'] > 0.03]
+
+for i in high_emissions["Country Name"]:
+    print(i)
+        #The country names are listed in the console
+
+#c)
+sns.relplot(data, x='Internet use', y='Greenhouse gas emissions', col= 'Region')
+    #There is variation per region, but according to the Internet Use. 
+    #For example, in Europe, the internet use is varying on a much smaller scale than in Asia
+
+#d)
+
+
 
