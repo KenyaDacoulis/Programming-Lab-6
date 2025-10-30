@@ -83,36 +83,40 @@ sns.relplot(data, x='High Income Economy', y='GNI per capita' , col= 'Region')
 sns.relplot(data, x='High Income Economy', y='International tourism' , col= 'Region')
     #No, there is no correlation between the international tourism and the country's income economy. 
 
-#Fourth question : Does the greenhhouse gas emissions have an effect on female life expectancy?
-sns.relplot(data, x='Life expectancy, female', y='Greenhouse gas emissions' , col= 'Region')
-    #No, there is no correlation between the two, we can only tell which region have higher gas emissions
+#Fourth question : Is there a relation between the GNI per Capita and the International economy  
+sns.relplot(data, x='GNI per capita', y='International tourism' , col= 'Region') 
+    #The relation is more clear in some regions than others.  
 
-#Fifth question :  
-sns.relplot(data, x='Population', y='Greenhouse gas emissions' , col= 'Region')
+#Fifth question : Does the greenhhouse gas emissions have an effect on female life expectancy? 
+sns.relplot(data, x='Life expectancy, female', y='Greenhouse gas emissions' , col= 'Region') 
+    #No, there is no correlation between the two, we can only tell which region have higher gas emissions 
 
-#6th question : 
-sns.relplot(data, x='Tertiary education, male', y='GNI per capita' , col= 'Region')
-
+#6th question :  Is there a relationship between Women in national parliament and women's Tertiary education.  
+sns.relplot(data, x='Women in national parliament', y='Tertiary education, female' , col= 'Region') 
+    #It seems to have a clearer correlation in certain regions, like in Oceania where we can see a linear relation,  
+    #rather than in Asia or Europe where the scatter plot is forming a cloud like shape. 
 
 #Part 4.6 
 
 #a)
-sns.relplot(data, x='Internet use', y='Greenhouse gas emissions', hue= 'Region')
-    # No, there is no clear assosiation in the data, or correlation in the plot
+data['emissions per capita'] = data['Greenhouse gas emissions']/ data['Population']
+
+sns.relplot(data, x='Internet use', y='emissions per capita', hue= 'Region')
+    # Yes, there is a clear correlation between greenhouse gas emmisions per capita and internet use 
 
 #b)
-high_emissions = data[data['Greenhouse gas emissions'] > 0.03]
+high_emissions = data[data['emissions per capita'] > 0.03]
 
 for i in high_emissions["Country Name"]:
-    print(i)
-        #The country names are listed in the console
+    print('high emissions per capita =',i)
+        #The countries with high emissions per capita are Brunei Darussalam and Qatar
 
 #c)
-sns.relplot(data, x='Internet use', y='Greenhouse gas emissions', col= 'Region')
+sns.relplot(high_emissions, x= 'Internet use', y='emissions per capita', hue = 'Region')
     #There is variation per region, but according to the Internet Use. 
-    #For example, in Europe, the internet use is varying on a much smaller scale than in Asia
+    # The only contries with high emissions per capita are brunei and Quatar. They are in the 
+    #same region, Asia, so there is no variation with regards to region. In terms or internet use, 
+    #the two countries have similar, high internet use of 95 and 99.6  so within the reg
 
-#d)
-
-
+#d) No, only two countries, Brunei and Quatar have high emissions per capita. They are both countries with high income economies so the countries that do have high emissions are all high economy contries.
 
